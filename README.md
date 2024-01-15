@@ -1,5 +1,7 @@
 # Learning Audio Concepts from Counterfactual Natural Language
 
+[Read the Full Paper Here](https://arxiv.org/pdf/2401.04935.pdf)
+
 ![Teaser Image](assets/teaser.png)
 
 ## Abstract
