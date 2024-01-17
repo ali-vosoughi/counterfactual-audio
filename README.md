@@ -29,7 +29,7 @@ This study introduces causal reasoning and counterfactual analysis in the audio 
 **Baseline Comparison:**
 - Adapted the approach from CLAP, training with AudioCaps, Clotho, and MACS datasets.
 
-## Code and Data Information
+**Code and Data Information:**
 - We have shared the datasets in this repo.
 - The code excluded in this repository is the intellectual property of Bosch Research and may be considered for commercialization.
 
