@@ -1,8 +1,19 @@
+const SHOWCASE_PAGE_SIZE = 4;
+
 const state = {
   data: null,
-  filter: "all",
+  view: "source-event-swaps",
   offset: 0,
 };
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
 
 function formatNumber(value) {
   return new Intl.NumberFormat("en-US").format(value);
@@ -11,8 +22,8 @@ function formatNumber(value) {
 function metric(label, value) {
   return `
     <div class="metric">
-      <strong>${value}</strong>
-      <span>${label}</span>
+      <strong>${escapeHtml(value)}</strong>
+      <span>${escapeHtml(label)}</span>
     </div>
   `;
 }
@@ -25,37 +36,50 @@ function renderHeroMetrics(project) {
       "caption-level pairs",
       formatNumber(project.totals.paired_caption_instances)
     ),
-    metric("reported retrieval gain", project.retrieval_gain),
+    metric("reported top-1 retrieval gain", project.retrieval_gain),
   ].join("");
 }
 
 function renderDatasetCards(datasets) {
   const target = document.getElementById("dataset-cards");
+
   target.innerHTML = datasets
-    .map(
-      (dataset) => `
+    .map((dataset) => {
+      const chips = [
+        `${formatNumber(dataset.paired_caption_instances)} paired caption instances`,
+        `${dataset.captions_per_clip} captions per clip`,
+        `avg duration ${dataset.duration_mean}s`,
+        `path: ${dataset.path_pattern}`,
+      ];
+
+      if (dataset.identical_pairs > 0) {
+        chips.push(
+          `${formatNumber(dataset.identical_pairs)} identical factual/counterfactual pairs`
+        );
+      }
+
+      return `
         <article class="card dataset-card">
-          <p class="card-label">${dataset.name} / ${dataset.split_label}</p>
+          <p class="card-label">${escapeHtml(dataset.name)} / ${escapeHtml(
+            dataset.split_label
+          )}</p>
           <h3>${formatNumber(dataset.records)} records</h3>
-          <p>${dataset.notes}</p>
+          <p>${escapeHtml(dataset.notes)}</p>
           <div class="dataset-meta">
-            <span class="meta-chip">${formatNumber(
-              dataset.paired_caption_instances
-            )} paired caption instances</span>
-            <span class="meta-chip">${dataset.captions_per_clip} captions per clip</span>
-            <span class="meta-chip">avg duration ${dataset.duration_mean}s</span>
-            <span class="meta-chip">path: ${dataset.path_pattern}</span>
+            ${chips
+              .map((chip) => `<span class="meta-chip">${escapeHtml(chip)}</span>`)
+              .join("")}
           </div>
           <div class="dataset-links">
-            <a href="${dataset.source_url}">Source dataset</a>
+            <a href="${escapeHtml(dataset.source_url)}">Source dataset</a>
             <span> · </span>
-            <a href="${dataset.download_url}">Download entry point</a>
+            <a href="${escapeHtml(dataset.download_url)}">Download entry point</a>
             <span> · </span>
-            <a href="${dataset.release_url}">Release JSON</a>
+            <a href="${escapeHtml(dataset.release_url)}">Release JSON</a>
           </div>
         </article>
-      `
-    )
+      `;
+    })
     .join("");
 }
 
@@ -66,41 +90,36 @@ function renderPromptCards(prompts) {
       (prompt, index) => `
         <article class="card prompt-card">
           <span>Prompt ${index + 1}</span>
-          <p>${prompt}</p>
+          <p>${escapeHtml(prompt)}</p>
         </article>
       `
     )
     .join("");
 }
 
-function buildFilterButtons(datasets) {
-  const filterTarget = document.getElementById("dataset-filters");
-  const available = datasets.filter((dataset) => dataset.examples.length > 0);
-  const filters = [
-    { id: "all", label: "All" },
-    ...available.map((dataset) => ({ id: dataset.id, label: dataset.name })),
-  ];
+function buildShowcaseButtons(showcases) {
+  const target = document.getElementById("showcase-filters");
 
-  filterTarget.innerHTML = filters
+  target.innerHTML = showcases
     .map(
-      (filter) => `
+      (view) => `
         <button
-          class="filter-button ${filter.id === state.filter ? "active" : ""}"
+          class="filter-button ${view.id === state.view ? "active" : ""}"
           type="button"
-          data-filter="${filter.id}"
+          data-view="${escapeHtml(view.id)}"
         >
-          ${filter.label}
+          ${escapeHtml(view.label)}
         </button>
       `
     )
     .join("");
 
-  filterTarget.querySelectorAll("[data-filter]").forEach((button) => {
+  target.querySelectorAll("[data-view]").forEach((button) => {
     button.addEventListener("click", () => {
-      state.filter = button.dataset.filter;
+      state.view = button.dataset.view;
       state.offset = 0;
-      buildFilterButtons(state.data.datasets);
-      renderSamples();
+      buildShowcaseButtons(state.data.showcases);
+      renderShowcase();
     });
   });
 }
@@ -114,51 +133,66 @@ function rotate(items, offset) {
   return items.slice(normalizedOffset).concat(items.slice(0, normalizedOffset));
 }
 
-function collectExamples() {
-  if (state.filter === "all") {
-    return state.data.datasets.flatMap((dataset) =>
-      dataset.examples.map((example) => ({ ...example, dataset: dataset.name }))
-    );
-  }
-
-  const dataset = state.data.datasets.find((entry) => entry.id === state.filter);
-  if (!dataset) {
-    return [];
-  }
-
-  return dataset.examples.map((example) => ({ ...example, dataset: dataset.name }));
+function currentShowcase() {
+  return state.data.showcases.find((view) => view.id === state.view);
 }
 
-function renderSamples() {
-  const target = document.getElementById("sample-grid");
-  const examples = rotate(collectExamples(), state.offset);
-  const maxItems = state.filter === "all" ? 6 : 4;
+function renderShowcase() {
+  const view = currentShowcase();
+  const gridTarget = document.getElementById("sample-grid");
+  const labelTarget = document.getElementById("showcase-label");
+  const titleTarget = document.getElementById("showcase-title");
+  const descriptionTarget = document.getElementById("showcase-description");
+  const noteTarget = document.getElementById("showcase-note");
+  const reshuffleButton = document.getElementById("reshuffle");
 
-  target.innerHTML = examples
-    .slice(0, maxItems)
+  if (!view) {
+    gridTarget.innerHTML = "";
+    labelTarget.textContent = "";
+    titleTarget.textContent = "Curated examples";
+    descriptionTarget.textContent = "";
+    noteTarget.textContent = "";
+    reshuffleButton.disabled = true;
+    return;
+  }
+
+  labelTarget.textContent = view.label;
+  titleTarget.textContent = view.title;
+  descriptionTarget.textContent = view.description;
+  noteTarget.textContent = view.note;
+
+  const examples = rotate(view.examples, state.offset).slice(0, SHOWCASE_PAGE_SIZE);
+
+  gridTarget.innerHTML = examples
     .map(
       (example) => `
         <article class="card sample-card">
           <header>
-            <div>
-              <p class="card-label">${example.dataset}</p>
-              <h3>${example.path}</h3>
+            <div class="sample-header">
+              <div class="sample-header-top">
+                <span class="tag-chip">${escapeHtml(example.dataset)}</span>
+                <span class="tag-chip tag-chip-accent">${escapeHtml(example.tag)}</span>
+              </div>
+              <h3 class="sample-focus">${escapeHtml(example.focus)}</h3>
+              <p class="sample-path">${escapeHtml(example.path)}</p>
             </div>
           </header>
           <div class="sample-pair">
             <div class="sample-block factual">
               <strong>Factual</strong>
-              <p>${example.factual}</p>
+              <p>${escapeHtml(example.factual)}</p>
             </div>
             <div class="sample-block counterfactual">
               <strong>Counterfactual</strong>
-              <p>${example.counterfactual}</p>
+              <p>${escapeHtml(example.counterfactual)}</p>
             </div>
           </div>
         </article>
       `
     )
     .join("");
+
+  reshuffleButton.disabled = view.examples.length <= SHOWCASE_PAGE_SIZE;
 }
 
 function renderValidationNote(datasets) {
@@ -171,7 +205,53 @@ function renderValidationNote(datasets) {
   }
 
   target.textContent =
-    "Release note: the current Clotho validation JSON mirrors the factual captions in its counterfactual field, so the interactive sample view focuses on the non-identical releases.";
+    "Release note: the current Clotho validation JSON mirrors the factual captions in its counterfactual field, so the curated examples focus on the non-identical releases.";
+}
+
+async function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "absolute";
+  textarea.style.left = "-9999px";
+  document.body.append(textarea);
+  textarea.select();
+
+  const successful = document.execCommand("copy");
+  textarea.remove();
+
+  if (!successful) {
+    throw new Error("Copy command failed");
+  }
+}
+
+function setupCopyButtons() {
+  document.querySelectorAll("[data-copy-target]").forEach((button) => {
+    const initialLabel = button.textContent;
+
+    button.addEventListener("click", async () => {
+      const target = document.getElementById(button.dataset.copyTarget);
+      if (!target) {
+        return;
+      }
+
+      try {
+        await copyText(target.textContent.trim());
+        button.textContent = "Copied";
+      } catch (error) {
+        button.textContent = "Copy failed";
+      }
+
+      window.setTimeout(() => {
+        button.textContent = initialLabel;
+      }, 1400);
+    });
+  });
 }
 
 async function initialize() {
@@ -181,21 +261,27 @@ async function initialize() {
   }
 
   state.data = await response.json();
+  state.view = state.data.showcases[0]?.id || state.view;
+
   renderHeroMetrics(state.data.project);
   renderDatasetCards(state.data.datasets);
   renderPromptCards(state.data.prompts);
-  buildFilterButtons(state.data.datasets);
+  buildShowcaseButtons(state.data.showcases);
   renderValidationNote(state.data.datasets);
-  renderSamples();
+  renderShowcase();
 
-  const reshuffle = document.getElementById("reshuffle");
-  reshuffle.addEventListener("click", () => {
-    state.offset += 1;
-    renderSamples();
+  const reshuffleButton = document.getElementById("reshuffle");
+  reshuffleButton.addEventListener("click", () => {
+    state.offset += SHOWCASE_PAGE_SIZE;
+    renderShowcase();
   });
 }
 
+setupCopyButtons();
+
 initialize().catch((error) => {
   const target = document.getElementById("sample-grid");
-  target.innerHTML = `<article class="card sample-card"><p>${error.message}</p></article>`;
+  target.innerHTML = `<article class="card sample-card"><p>${escapeHtml(
+    error.message
+  )}</p></article>`;
 });

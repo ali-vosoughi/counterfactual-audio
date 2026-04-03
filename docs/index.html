@@ -3,10 +3,51 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Counterfactual Audio</title>
+    <title>Counterfactual Audio | ICASSP 2024</title>
     <meta
       name="description"
-      content="Counterfactual caption release for AudioCaps, Clotho, and MACS, prepared for the ICASSP 2024 paper Learning Audio Concepts from Counterfactual Natural Language."
+      content="Counterfactual caption release for AudioCaps, Clotho, and MACS. Companion website for the ICASSP 2024 paper Learning Audio Concepts from Counterfactual Natural Language."
+    />
+    <link rel="canonical" href="https://ali-vosoughi.github.io/counterfactual-audio/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Counterfactual Audio | ICASSP 2024" />
+    <meta
+      property="og:description"
+      content="Counterfactual caption release for AudioCaps, Clotho, and MACS, designed to help audio-language models distinguish factual and alternative sound-source descriptions."
+    />
+    <meta
+      property="og:url"
+      content="https://ali-vosoughi.github.io/counterfactual-audio/"
+    />
+    <meta
+      property="og:image"
+      content="https://ali-vosoughi.github.io/counterfactual-audio/assets/teaser.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Counterfactual Audio | ICASSP 2024" />
+    <meta
+      name="twitter:description"
+      content="Companion website for Learning Audio Concepts from Counterfactual Natural Language."
+    />
+    <meta
+      name="twitter:image"
+      content="https://ali-vosoughi.github.io/counterfactual-audio/assets/teaser.png"
+    />
+    <meta
+      name="citation_title"
+      content="Learning Audio Concepts from Counterfactual Natural Language"
+    />
+    <meta name="citation_author" content="Ali Vosoughi" />
+    <meta name="citation_author" content="Luca Bondi" />
+    <meta name="citation_author" content="Ho-Hsiang Wu" />
+    <meta name="citation_author" content="Chenliang Xu" />
+    <meta
+      name="citation_conference_title"
+      content="2024 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)"
+    />
+    <meta
+      name="citation_pdf_url"
+      content="https://arxiv.org/pdf/2401.04935.pdf"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,9 +63,10 @@
       <a class="brand" href="#top">Counterfactual Audio</a>
       <nav class="site-nav" aria-label="Primary">
         <a href="#release">Release</a>
+        <a href="#why">Why It Matters</a>
         <a href="#workflow">Use It</a>
         <a href="#demo">Examples</a>
-        <a href="#resources">Resources</a>
+        <a href="#citation-callout">Cite</a>
       </nav>
     </header>
 
@@ -33,16 +75,28 @@
         <div class="hero-copy">
           <p class="eyebrow">ICASSP 2024 paper companion</p>
           <h1>Learning audio concepts from counterfactual natural language.</h1>
+          <p class="hero-authors">
+            <a href="https://alivosoughi.com/">Ali Vosoughi</a>,
+            <a href="https://scholar.google.com/citations?user=fWhDIgQAAAAJ&amp;hl=en&amp;oi=ao">Luca Bondi</a>,
+            <a href="https://hohsiangwu.github.io/">Ho-Hsiang Wu</a>,
+            <a href="https://www.cs.rochester.edu/~cxu22/">Chenliang Xu</a>
+          </p>
+          <p class="hero-meta">Accepted at IEEE ICASSP 2024</p>
           <p class="lede">
-            A polished release of counterfactual caption annotations for
-            AudioCaps, Clotho, and MACS, designed to help audio-language models
-            reason about alternative sound-source scenarios instead of learning
-            from factual captions alone.
+            Counterfactual Audio releases counterfactual caption annotations for
+            AudioCaps, Clotho, and MACS so researchers can study not only which
+            text matches an audio clip, but which nearby alternatives should be
+            rejected for that same clip.
+          </p>
+          <p class="hero-novelty">
+            <strong>Novelty:</strong> this release adds counterfactual language
+            for the same audio clip, not just factual caption matching.
           </p>
           <div class="hero-actions">
             <a class="button primary" href="https://arxiv.org/abs/2401.04935">Read paper</a>
-            <a class="button" href="https://ieeexplore.ieee.org/document/10446736">IEEE Xplore</a>
-            <a class="button" href="https://github.com/ali-vosoughi/counterfactual-audio">GitHub</a>
+            <a class="button" href="#citation-callout">Cite</a>
+            <a class="button" href="#datasets">Browse data</a>
+            <a class="button" href="#workflow">Use the dataset</a>
           </div>
           <div class="hero-metrics" id="hero-metrics"></div>
         </div>
@@ -57,11 +111,57 @@
           <div class="floating-note">
             <span class="pill">What changes?</span>
             <p>
-              Not the audio clip itself. The released intervention happens in
-              language, by rewriting sound sources and scene descriptions into
-              plausible counterfactual alternatives.
+              The audio path stays fixed. The intervention happens in language,
+              by rewriting sound sources and scene descriptions into plausible
+              counterfactual alternatives.
             </p>
           </div>
+        </div>
+
+        <div class="hero-strip">
+          <article class="card hero-strip-card">
+            <p class="card-label">Paper and repository</p>
+            <h3>Quick entry points</h3>
+            <div class="link-list">
+              <a href="https://arxiv.org/abs/2401.04935">arXiv</a>
+              <a href="https://ieeexplore.ieee.org/document/10446736">IEEE Xplore</a>
+              <a href="https://github.com/ali-vosoughi/counterfactual-audio">GitHub repository</a>
+              <a href="https://github.com/ali-vosoughi/counterfactual-audio/blob/main/CITATION.cff">CITATION.cff</a>
+            </div>
+          </article>
+
+          <article class="card hero-strip-card">
+            <p class="card-label">Direct release files</p>
+            <h3>Browse the JSON annotations</h3>
+            <div class="link-list">
+              <a href="https://github.com/ali-vosoughi/counterfactual-audio/blob/main/audiocaps-train-counterfactual.json">AudioCaps train JSON</a>
+              <a href="https://github.com/ali-vosoughi/counterfactual-audio/blob/main/clotho-development-counterfactual.json">Clotho development JSON</a>
+              <a href="https://github.com/ali-vosoughi/counterfactual-audio/blob/main/clotho-validation-counterfactual.json">Clotho validation JSON</a>
+              <a href="https://github.com/ali-vosoughi/counterfactual-audio/blob/main/macs-counterfactual.json">MACS JSON</a>
+            </div>
+          </article>
+
+          <article class="card hero-strip-card">
+            <p class="card-label">Citation</p>
+            <h3>Make the paper easy to cite</h3>
+            <p>
+              Use the recommended BibTeX entry directly from this page or from
+              the repository citation file.
+            </p>
+            <div class="mini-bibtex" id="hero-bibtex-preview">
+              @inproceedings{vosoughi2024counterfactualaudio, ...}
+            </div>
+            <div class="hero-strip-actions">
+              <button
+                class="button secondary"
+                type="button"
+                data-copy-target="citation-bibtex"
+              >
+                Copy BibTeX
+              </button>
+              <a class="text-link" href="#citation-callout">Jump to full citation</a>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -71,10 +171,9 @@
           <h2>A paper companion release, not just a storage bucket.</h2>
           <p>
             The repository packages the released annotation files, prompt
-            scaffold, usage guidance, and a static project page. It is organized
-            so someone can understand the method, obtain the original audio
-            from the official sources, and wire these annotations into an
-            existing audio-text pipeline quickly.
+            scaffold, usage guidance, and a static project page so a researcher
+            can understand the method, inspect the released data, and plug the
+            annotations into an existing audio-text pipeline with minimal setup.
           </p>
         </div>
 
@@ -82,38 +181,44 @@
           <article class="card feature-card">
             <h3>Counterfactual captions</h3>
             <p>
-              Released JSON files keep the original human caption(s) and pair
-              them with counterfactual rewrites for the same clip.
+              Each released JSON row preserves the original human caption(s) and
+              adds a counterfactual rewrite for the same clip.
             </p>
           </article>
           <article class="card feature-card">
             <h3>Path-aligned to source audio</h3>
             <p>
-              Each row includes a relative path that can be joined with the
+              The <code>path</code> field keeps the annotations joinable to the
               official AudioCaps, Clotho, or MACS audio tree.
             </p>
           </article>
           <article class="card feature-card">
             <h3>Prompt scaffold included</h3>
             <p>
-              The released prompt template exposes the caption decomposition and
-              rewrite strategy used to construct counterfactual text.
+              The release exposes the caption-to-source decomposition and
+              rewrite prompt used to generate counterfactual text.
             </p>
           </article>
           <article class="card feature-card">
-            <h3>Ready for GitHub Pages</h3>
+            <h3>Research-ready website</h3>
             <p>
-              Everything in this website ships from the repository itself under
-              <code>docs/</code>, so the project page is ready to publish.
+              The GitHub Pages site lives directly in <code>docs/</code> and is
+              prepared to serve as a stable paper landing page.
             </p>
           </article>
         </div>
       </section>
 
-      <section class="section">
+      <section class="section" id="why">
         <div class="section-heading">
-          <p class="eyebrow">Method framing</p>
-          <h2>What changes relative to standard contrastive audio-text training?</h2>
+          <p class="eyebrow">Why this matters</p>
+          <h2>Counterfactual captions change the supervision signal, not just the wording.</h2>
+          <p>
+            Standard CLAP-style audio-text contrastive learning tells the model
+            which caption matches a clip. Counterfactual Audio adds a second
+            text view for that exact same clip, creating a stronger signal for
+            what should not match.
+          </p>
         </div>
 
         <div class="compare-grid">
@@ -121,18 +226,88 @@
             <p class="card-label">Standard CLAP-style setup</p>
             <h3>Audio and factual captions are matched contrastively.</h3>
             <p>
-              The model learns which text matches the clip, but it is not
-              explicitly told which nearby descriptions should be rejected for
-              the exact same audio.
+              The model learns which text is correct for the clip, but it is
+              not explicitly told which nearby textual alternatives should be
+              rejected for the same audio.
             </p>
           </article>
           <article class="card compare-card accent">
             <p class="card-label">Counterfactual Audio setup</p>
             <h3>The same clip is paired with factual and counterfactual text.</h3>
             <p>
-              This adds structured linguistic negatives and lets the training
-              objective preserve factual consistency while separating
-              counterfactual alternatives in embedding space.
+              This adds structured linguistic negatives and supports training
+              objectives that preserve factual consistency while separating
+              alternative scenarios in embedding space.
+            </p>
+          </article>
+        </div>
+
+        <div class="insight-grid">
+          <article class="card insight-card">
+            <h3>Match vs. reject</h3>
+            <p>
+              The model sees both a positive caption and a semantically nearby
+              alternative attached to the same audio item.
+            </p>
+          </article>
+          <article class="card insight-card">
+            <h3>Same audio, different language</h3>
+            <p>
+              The supervision intervenes in text only, which makes it useful for
+              retrieval, representation learning, and causal-style ablations.
+            </p>
+          </article>
+          <article class="card insight-card">
+            <h3>Hard negatives with structure</h3>
+            <p>
+              These are not generic random mismatches. They are
+              caption-conditioned alternatives intended to challenge the model
+              more directly.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="use-cases">
+        <div class="section-heading">
+          <p class="eyebrow">What you can do</p>
+          <h2>Concrete ways to use the release in research pipelines.</h2>
+        </div>
+
+        <div class="use-case-grid">
+          <article class="card use-case-card">
+            <h3>Hard negatives</h3>
+            <p>
+              Treat <code>counterfactual_caption</code> as a structured hard
+              negative for the same audio clip in an existing audio-text setup.
+            </p>
+          </article>
+          <article class="card use-case-card">
+            <h3>Retrieval analysis</h3>
+            <p>
+              Measure whether an embedding space separates factual captions from
+              plausible but wrong alternatives.
+            </p>
+          </article>
+          <article class="card use-case-card">
+            <h3>Representation learning</h3>
+            <p>
+              Study whether the model encodes sound sources and acoustic events
+              more explicitly under counterfactual supervision.
+            </p>
+          </article>
+          <article class="card use-case-card">
+            <h3>Causal-style ablations</h3>
+            <p>
+              Probe how language-level interventions change retrieval or
+              classification behavior without altering the audio itself.
+            </p>
+          </article>
+          <article class="card use-case-card">
+            <h3>Dataset augmentation</h3>
+            <p>
+              Use the paired text to augment caption corpora with alternative
+              linguistic scenarios while preserving clip alignment.
             </p>
           </article>
         </div>
@@ -148,13 +323,13 @@
 
       <section class="section" id="workflow">
         <div class="section-heading">
-          <p class="eyebrow">How to use it</p>
-          <h2>Download the source audio, then join on <code>path</code>.</h2>
+          <p class="eyebrow">How to use the data</p>
+          <h2>Download the source audio, join on <code>path</code>, and flatten pairs.</h2>
           <p>
             This repository does not redistribute the original audio. It
             complements the official dataset releases and keeps the alignment
-            simple: the relative path in each JSON row points back to the source
-            clip.
+            intentionally simple: the relative path in each JSON row points back
+            to the source clip.
           </p>
         </div>
 
@@ -163,15 +338,15 @@
             <span class="step-index">01</span>
             <h3>Download source audio</h3>
             <p>
-              Obtain AudioCaps, Clotho, and MACS audio from their official
-              providers and keep the original folder structure when possible.
+              Obtain AudioCaps, Clotho, and MACS from their official providers
+              and preserve the original folder structure when possible.
             </p>
           </article>
           <article class="card step-card">
             <span class="step-index">02</span>
             <h3>Load one release JSON</h3>
             <p>
-              Each row already contains the factual captions, counterfactual
+              Each row already includes factual captions, counterfactual
               captions, relative audio path, and metadata such as duration or
               samplerate.
             </p>
@@ -194,23 +369,50 @@
   --limit 3 \
   --check-files</code></pre>
         </div>
+
+        <p class="workflow-note">
+          If you already have a CLAP-style pipeline, the simplest integration is
+          to use <code>caption</code> as the factual positive and
+          <code>counterfactual_caption</code> as a structured hard negative tied
+          to the same audio item.
+        </p>
       </section>
 
       <section class="section" id="demo">
         <div class="section-heading">
-          <p class="eyebrow">Demo-style browse</p>
-          <h2>Explore factual and counterfactual pairs from the released files.</h2>
+          <p class="eyebrow">Counterfactual examples</p>
+          <h2>Curated text-first examples from the released files.</h2>
           <p>
-            These examples are pulled from the repository’s JSON release and
-            displayed as curated text-only cards. Filter by dataset or rotate to
-            another set of pairs.
+            The page stays lightweight and license-safe by keeping the demo
+            text-first. Each card below fixes the audio path and shows how the
+            paired language shifts.
           </p>
         </div>
 
+        <p class="demo-howto">
+          How to read this: the audio clip is fixed for every card. Only the
+          language intervention changes from factual to counterfactual.
+        </p>
+
         <div class="demo-toolbar">
-          <div class="filter-group" id="dataset-filters" role="tablist" aria-label="Dataset filters"></div>
-          <button class="button secondary" id="reshuffle" type="button">Show another set</button>
+          <div
+            class="filter-group"
+            id="showcase-filters"
+            role="tablist"
+            aria-label="Counterfactual example views"
+          ></div>
+          <button class="button secondary" id="reshuffle" type="button">
+            Show more examples
+          </button>
         </div>
+
+        <div class="showcase-summary card">
+          <p class="card-label" id="showcase-label">Source / event swaps</p>
+          <h3 id="showcase-title">Curated examples</h3>
+          <p id="showcase-description"></p>
+          <p class="showcase-note" id="showcase-note"></p>
+        </div>
+
         <div class="sample-grid" id="sample-grid"></div>
         <p class="demo-note" id="validation-note"></p>
       </section>
@@ -219,14 +421,52 @@
         <div class="section-heading">
           <p class="eyebrow">Prompt scaffold</p>
           <h2>The release also exposes the text-generation recipe.</h2>
+          <p>
+            The prompt template documents the source-identification and
+            counterfactual-rewrite setup used in the released annotation
+            process.
+          </p>
         </div>
         <div class="prompt-grid" id="prompt-cards"></div>
+      </section>
+
+      <section class="section" id="caveats">
+        <div class="section-heading">
+          <p class="eyebrow">Release caveats</p>
+          <h2>Important limits to keep in view when you use the release.</h2>
+        </div>
+
+        <div class="caveat-grid">
+          <article class="card caveat-card">
+            <h3>No audio redistribution</h3>
+            <p>
+              This repository releases text annotations and supporting
+              documentation, not hosted audio clips from the source datasets.
+            </p>
+          </article>
+          <article class="card caveat-card">
+            <h3>Validation split note</h3>
+            <p>
+              In the current Clotho validation JSON, the
+              <code>captions_counterfactual</code> field mirrors the factual
+              captions entry-for-entry.
+            </p>
+          </article>
+          <article class="card caveat-card">
+            <h3>Original dataset licenses apply</h3>
+            <p>
+              Any workflow that touches the original audio should follow the
+              licenses and terms attached to AudioCaps, Clotho, MACS, and their
+              upstream sources.
+            </p>
+          </article>
+        </div>
       </section>
 
       <section class="section" id="resources">
         <div class="section-heading">
           <p class="eyebrow">Resources</p>
-          <h2>Paper, repository, and source dataset entry points.</h2>
+          <h2>Paper, data release, dataset sources, and citation paths.</h2>
         </div>
 
         <div class="resource-grid">
@@ -236,27 +476,85 @@
               <a href="https://arxiv.org/abs/2401.04935">arXiv</a> |
               <a href="https://ieeexplore.ieee.org/document/10446736">IEEE Xplore</a>
             </p>
-            <p class="muted">Accepted at ICASSP 2024.</p>
-          </article>
-          <article class="card resource-card">
-            <h3>Source audio datasets</h3>
-            <p>
-              <a href="https://github.com/cdjkim/audiocaps">AudioCaps</a>,
-              <a href="https://zenodo.org/records/3490684">Clotho</a>,
-              <a href="https://zenodo.org/records/5114771">MACS</a>
+            <p class="muted">
+              Companion page for the accepted ICASSP 2024 paper.
             </p>
-            <p class="muted">Use the official providers and dataset licenses.</p>
           </article>
+
+          <article class="card resource-card">
+            <h3>Data release</h3>
+            <div class="link-list">
+              <a href="https://github.com/ali-vosoughi/counterfactual-audio/blob/main/audiocaps-train-counterfactual.json">AudioCaps train JSON</a>
+              <a href="https://github.com/ali-vosoughi/counterfactual-audio/blob/main/clotho-development-counterfactual.json">Clotho development JSON</a>
+              <a href="https://github.com/ali-vosoughi/counterfactual-audio/blob/main/clotho-validation-counterfactual.json">Clotho validation JSON</a>
+              <a href="https://github.com/ali-vosoughi/counterfactual-audio/blob/main/macs-counterfactual.json">MACS JSON</a>
+            </div>
+          </article>
+
+          <article class="card resource-card">
+            <h3>Official source datasets</h3>
+            <div class="link-list">
+              <a href="https://github.com/cdjkim/audiocaps">AudioCaps</a>
+              <a href="https://zenodo.org/records/3490684">Clotho</a>
+              <a href="https://zenodo.org/records/5114771">MACS</a>
+              <a href="https://zenodo.org/record/2589280">TAU Urban Acoustic Scenes 2019</a>
+            </div>
+          </article>
+
           <article class="card resource-card">
             <h3>Citation</h3>
-            <pre><code>@inproceedings{vosoughi2024counterfactualaudio,
-  title={Learning Audio Concepts from Counterfactual Natural Language},
-  author={Vosoughi, Ali and Bondi, Luca and Wu, Ho-Hsiang and Xu, Chenliang},
-  booktitle={ICASSP},
-  year={2024}
-}</code></pre>
+            <p>
+              Use the recommended BibTeX below or the repository’s
+              <a href="https://github.com/ali-vosoughi/counterfactual-audio/blob/main/CITATION.cff">CITATION.cff</a>.
+            </p>
+            <div class="resource-actions">
+              <button
+                class="button secondary"
+                type="button"
+                data-copy-target="citation-bibtex"
+              >
+                Copy BibTeX
+              </button>
+              <a class="text-link" href="#citation-callout">Recommended citation</a>
+            </div>
           </article>
         </div>
+      </section>
+
+      <section class="section" id="citation-callout">
+        <article class="card citation-callout">
+          <p class="eyebrow">Recommended citation</p>
+          <h2>Cite the ICASSP 2024 paper if you use this release.</h2>
+          <p>
+            The release is designed to make the paper and dataset easy to adopt
+            together: inspect the JSON files, wire them into your pipeline, and
+            cite the published work when it supports your research.
+          </p>
+          <div class="citation-actions">
+            <button
+              class="button primary"
+              type="button"
+              data-copy-target="citation-bibtex"
+            >
+              Copy BibTeX
+            </button>
+            <a
+              class="button"
+              href="https://github.com/ali-vosoughi/counterfactual-audio/blob/main/CITATION.cff"
+            >
+              View CITATION.cff
+            </a>
+          </div>
+          <div class="code-block citation-code">
+            <pre><code id="citation-bibtex">@inproceedings{vosoughi2024counterfactualaudio,
+  title={Learning Audio Concepts from Counterfactual Natural Language},
+  author={Vosoughi, Ali and Bondi, Luca and Wu, Ho-Hsiang and Xu, Chenliang},
+  booktitle={2024 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  year={2024},
+  url={https://ieeexplore.ieee.org/document/10446736}
+}</code></pre>
+          </div>
+        </article>
       </section>
     </main>
 

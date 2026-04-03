@@ -1,13 +1,20 @@
 # Counterfactual Audio
 
-Companion repository for the ICASSP 2024 paper
+Companion repository and project page for the ICASSP 2024 paper
 [Learning Audio Concepts from Counterfactual Natural Language](https://arxiv.org/abs/2401.04935).
+
+**Authors:** [Ali Vosoughi](https://alivosoughi.com/), [Luca Bondi](https://scholar.google.com/citations?user=fWhDIgQAAAAJ&hl=en&oi=ao), [Ho-Hsiang Wu](https://hohsiangwu.github.io/), [Chenliang Xu](https://www.cs.rochester.edu/~cxu22/)  
+**Venue:** IEEE ICASSP 2024  
+**Project page:** https://ali-vosoughi.github.io/counterfactual-audio/
 
 This repository releases counterfactual text annotations aligned to
 human-captioned audio clips from AudioCaps, Clotho, and MACS. Each released
 record keeps the original caption(s) and adds a counterfactual alternative for
 the same audio clip, making it possible to study audio-text learning with
 alternative linguistic scenarios without collecting new audio.
+
+This release adds counterfactual language for the same audio clip, not just
+factual caption matching.
 
 Paper links: [arXiv](https://arxiv.org/abs/2401.04935) |
 [IEEE Xplore](https://ieeexplore.ieee.org/document/10446736) |
@@ -45,6 +52,14 @@ That extra text signal is useful for:
 In the paper, the method augments a CLAP-style objective with counterfactual
 language and additional losses that preserve factual consistency while pushing
 factual and counterfactual text apart in embedding space.
+
+## What you can do with this release
+
+- plug the pairs into an existing CLAP-style pipeline as structured hard negatives,
+- evaluate whether an embedding separates factual captions from plausible alternatives,
+- run causal-style language interventions without changing the audio clip,
+- augment audio-language pretraining corpora with counterfactual text, and
+- inspect dataset-specific behavior across AudioCaps, Clotho, and MACS.
 
 ## Repository layout
 

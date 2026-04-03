@@ -8,6 +8,15 @@
     "arxiv_url": "https://arxiv.org/abs/2401.04935",
     "ieee_url": "https://ieeexplore.ieee.org/document/10446736",
     "venue": "ICASSP 2024",
+    "authors": [
+      "Ali Vosoughi",
+      "Luca Bondi",
+      "Ho-Hsiang Wu",
+      "Chenliang Xu"
+    ],
+    "acceptance_note": "Accepted at IEEE ICASSP 2024",
+    "novelty_statement": "This release adds counterfactual language for the same audio clip, not just factual caption matching.",
+    "bibtex": "@inproceedings{vosoughi2024counterfactualaudio,\n  title={Learning Audio Concepts from Counterfactual Natural Language},\n  author={Vosoughi, Ali and Bondi, Luca and Wu, Ho-Hsiang and Xu, Chenliang},\n  booktitle={2024 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},\n  year={2024},\n  url={https://ieeexplore.ieee.org/document/10446736}\n}",
     "retrieval_gain": "43%+ top-1 improvement on Clotho text-to-audio retrieval",
     "totals": {
       "records": 54302,
@@ -155,6 +164,179 @@
           "path": "development/audio/public_square-prague-1192-45104-a.wav",
           "factual": "adults talking and announcement jingle",
           "counterfactual": "rain pouring and thunder rumbling"
+        }
+      ]
+    }
+  ],
+  "showcases": [
+    {
+      "id": "source-event-swaps",
+      "label": "Source / event swaps",
+      "title": "When the clip stays fixed but the core source changes",
+      "description": "These pairs mostly alter a salient source or event while leaving the caption format natural and compact.",
+      "note": "This view is useful for researchers who want text-first hard negatives that stay close to the original caption style.",
+      "examples": [
+        {
+          "dataset": "AudioCaps",
+          "path": "audio/--/--L22BmDI6E.m4a",
+          "tag": "source swap",
+          "focus": "dog whimpering to violin melody",
+          "factual": "The dog is whimpering sadly",
+          "counterfactual": "The violin is playing melodiously."
+        },
+        {
+          "dataset": "AudioCaps",
+          "path": "audio/--/--Z3ciOmwZQ.m4a",
+          "tag": "event swap",
+          "focus": "water bubbling to music playback",
+          "factual": "Water is bubbling",
+          "counterfactual": "Music is playing."
+        },
+        {
+          "dataset": "Clotho",
+          "path": "development/Pipe hit.wav",
+          "tag": "source swap",
+          "focus": "metal strike to natural ambience",
+          "factual": "A stick strikes a percussive instrument creating reverb",
+          "counterfactual": "A gentle breeze whispers through the leaves creating a soothing rustle."
+        },
+        {
+          "dataset": "Clotho",
+          "path": "development/Distorted AM Radio noise.wav",
+          "tag": "event swap",
+          "focus": "radio static to gentle rainfall",
+          "factual": "Loud television static dips in and out of focus",
+          "counterfactual": "Gentle raindrops pitter-patter against the windowpane."
+        },
+        {
+          "dataset": "MACS",
+          "path": "development/audio/airport-barcelona-0-0-a.wav",
+          "tag": "source swap",
+          "focus": "whistling and singing to violin and clock",
+          "factual": "a person whistling and singing",
+          "counterfactual": "A violin playing and a clock ticking."
+        },
+        {
+          "dataset": "MACS",
+          "path": "development/audio/public_square-london-115-3352-a.wav",
+          "tag": "hard negative",
+          "focus": "public-space chatter to dog bark and loud music",
+          "factual": "a child screaming people talking in the background",
+          "counterfactual": "a dog barking music playing loudly from a nearby house"
+        }
+      ]
+    },
+    {
+      "id": "scene-level-rewrites",
+      "label": "Scene-level rewrites",
+      "title": "When the counterfactual changes the whole scene",
+      "description": "These examples shift multiple sound sources at once, turning the same audio path into a linguistically different scene.",
+      "note": "This view highlights why counterfactual language is stronger than a generic random mismatch: the alternatives are still fluent scene descriptions.",
+      "examples": [
+        {
+          "dataset": "AudioCaps",
+          "path": "audio/--/---lTs1dxhU.m4a",
+          "tag": "scene rewrite",
+          "focus": "vehicle pass-by to children in a park",
+          "factual": "A racing vehicle engine is heard passing by",
+          "counterfactual": "A group of children laughing and playing in a park."
+        },
+        {
+          "dataset": "AudioCaps",
+          "path": "audio/--/--299m5_DdE.m4a",
+          "tag": "scene rewrite",
+          "focus": "water and child to wind and distant guitar",
+          "factual": "Water flows as a child shouts in the background",
+          "counterfactual": "Wind howls as a guitar strums in the distance."
+        },
+        {
+          "dataset": "Clotho",
+          "path": "development/outdoors2.wav",
+          "tag": "scene rewrite",
+          "focus": "door, leaves, and speech to bells, birds, and whistle",
+          "factual": "The squeaking of an old door opening, rustling ensues, the door squeaks again, and a woman speaks.",
+          "counterfactual": "The ringing of church bells, chirping of birds, rustling of leaves, and a man whistles."
+        },
+        {
+          "dataset": "Clotho",
+          "path": "development/loud_japanese_diner_full_of_drunk_people_120-90surround.wav",
+          "tag": "scene rewrite",
+          "focus": "restaurant crowd to emergency-report scene",
+          "factual": "Dishes click and clack in the background as a crowd chatters indistinctly.",
+          "counterfactual": "Sirens wail and helicopters thud in the foreground as a journalist interviews a witness."
+        },
+        {
+          "dataset": "MACS",
+          "path": "development/audio/public_square-prague-1192-45104-a.wav",
+          "tag": "scene rewrite",
+          "focus": "urban crowd to storm scene",
+          "factual": "adults talking and announcement jingle",
+          "counterfactual": "rain pouring and thunder rumbling"
+        },
+        {
+          "dataset": "MACS",
+          "path": "development/audio/public_square-london-115-3352-a.wav",
+          "tag": "scene rewrite",
+          "focus": "public square to traffic and construction",
+          "factual": "multiple sounds of people talking and children playing in the background",
+          "counterfactual": "A cacophony of car honking and construction work in progress near the vicinity."
+        }
+      ]
+    },
+    {
+      "id": "dataset-specific",
+      "label": "Dataset-specific examples",
+      "title": "Representative pairs from AudioCaps, Clotho, and MACS",
+      "description": "This view shows how the release differs by source dataset, from single-caption AudioCaps clips to multi-caption Clotho and multi-annotator MACS.",
+      "note": "The current Clotho validation release is excluded here because its counterfactual field mirrors the factual captions.",
+      "examples": [
+        {
+          "dataset": "AudioCaps",
+          "path": "audio/--/---1_cCGK4M.m4a",
+          "tag": "AudioCaps",
+          "focus": "single-caption pair",
+          "factual": "Idling car, train blows horn and passes",
+          "counterfactual": "Dogs barking, thunder rumbles in the distance"
+        },
+        {
+          "dataset": "AudioCaps",
+          "path": "audio/--/--RBwc_VFYA.m4a",
+          "tag": "AudioCaps",
+          "focus": "single-caption pair with natural ambience shift",
+          "factual": "Water is running and birds are chirping in the background",
+          "counterfactual": "Music is playing and children are laughing in the background."
+        },
+        {
+          "dataset": "Clotho",
+          "path": "development/Distorted AM Radio noise.wav",
+          "tag": "Clotho",
+          "focus": "one of five aligned caption pairs",
+          "factual": "A muddled noise of broken channel of the TV",
+          "counterfactual": "A tranquil symphony of ocean waves and seagulls at the beach."
+        },
+        {
+          "dataset": "Clotho",
+          "path": "development/loud_japanese_diner_full_of_drunk_people_120-90surround.wav",
+          "tag": "Clotho",
+          "focus": "multi-caption contrast on the same clip",
+          "factual": "Plates and silverware clatter while several people speak.",
+          "counterfactual": "Church bells chime as birds sing in the background."
+        },
+        {
+          "dataset": "MACS",
+          "path": "development/audio/airport-barcelona-0-0-a.wav",
+          "tag": "MACS",
+          "focus": "multi-annotator caption pair",
+          "factual": "people are talking whistling and singing",
+          "counterfactual": "cars are honking, dogs are barking and birds are chirping."
+        },
+        {
+          "dataset": "MACS",
+          "path": "development/audio/park-prague-1185-44120-a.wav",
+          "tag": "MACS",
+          "focus": "same scene, different textual alternative",
+          "factual": "adults talking with cars accelerating in the background",
+          "counterfactual": "Musicians jamming with dogs barking in the background."
         }
       ]
     }
