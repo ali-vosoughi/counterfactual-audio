@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+title: Counterfactual Audio
+message: If you use this repository, please cite the associated ICASSP 2024 paper.
+type: dataset
+authors:
+  - family-names: Vosoughi
+    given-names: Ali
+  - family-names: Bondi
+    given-names: Luca
+  - family-names: Wu
+    given-names: Ho-Hsiang
+  - family-names: Xu
+    given-names: Chenliang
+repository-code: https://github.com/ali-vosoughi/counterfactual-audio
+url: https://github.com/ali-vosoughi/counterfactual-audio
+keywords:
+  - audio-language learning
+  - counterfactual learning
+  - audio captioning
+  - multimodal representation learning
+preferred-citation:
+  type: conference-paper
+  title: Learning Audio Concepts from Counterfactual Natural Language
+  authors:
+    - family-names: Vosoughi
+      given-names: Ali
+    - family-names: Bondi
+      given-names: Luca
+    - family-names: Wu
+      given-names: Ho-Hsiang
+    - family-names: Xu
+      given-names: Chenliang
+  collection-title: 2024 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)
+  year: 2024
+  url: https://ieeexplore.ieee.org/document/10446736

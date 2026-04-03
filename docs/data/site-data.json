@@ -1,0 +1,162 @@
+{
+  "project": {
+    "title": "Counterfactual Audio",
+    "paper_title": "Learning Audio Concepts from Counterfactual Natural Language",
+    "summary": "Counterfactual caption release for AudioCaps, Clotho, and MACS, prepared for the ICASSP 2024 paper on audio-language learning with alternative linguistic scenarios.",
+    "repo_url": "https://github.com/ali-vosoughi/counterfactual-audio",
+    "website_url": "https://ali-vosoughi.github.io/counterfactual-audio/",
+    "arxiv_url": "https://arxiv.org/abs/2401.04935",
+    "ieee_url": "https://ieeexplore.ieee.org/document/10446736",
+    "venue": "ICASSP 2024",
+    "retrieval_gain": "43%+ top-1 improvement on Clotho text-to-audio retrieval",
+    "totals": {
+      "records": 54302,
+      "paired_caption_instances": 87183
+    }
+  },
+  "prompts": [
+    "Audio signal is a kind of wave that is directional from the source to microphone. Then, microphone records the sound. Each sound may have multiple sound sources. Humans detect these sounds and describe it based on its sources. What are the sound source or sources in the given caption?",
+    "Alter these sources with something very different and generate a caption of the same length and in one line and without itemization."
+  ],
+  "datasets": [
+    {
+      "id": "audiocaps",
+      "name": "AudioCaps",
+      "split_label": "train release",
+      "release_file": "audiocaps-train-counterfactual.json",
+      "release_url": "https://github.com/ali-vosoughi/counterfactual-audio/blob/main/audiocaps-train-counterfactual.json",
+      "source_url": "https://github.com/cdjkim/audiocaps",
+      "download_url": "https://audiocaps.github.io/",
+      "path_pattern": "audio/<prefix>/<clip>.m4a",
+      "notes": "One factual caption and one counterfactual caption per clip.",
+      "records": 45488,
+      "paired_caption_instances": 45488,
+      "captions_per_clip": "1",
+      "identical_pairs": 914,
+      "duration_mean": 9.864,
+      "duration_min": 0.599,
+      "duration_max": 10.99,
+      "examples": [
+        {
+          "path": "audio/--/---1_cCGK4M.m4a",
+          "factual": "Idling car, train blows horn and passes",
+          "counterfactual": "Dogs barking, thunder rumbles in the distance"
+        },
+        {
+          "path": "audio/--/---lTs1dxhU.m4a",
+          "factual": "A racing vehicle engine is heard passing by",
+          "counterfactual": "A group of children laughing and playing in a park."
+        },
+        {
+          "path": "audio/--/--0PQM4-hqg.m4a",
+          "factual": "A waterfall is pouring into a stream",
+          "counterfactual": "A guitar is being strummed in the studio."
+        },
+        {
+          "path": "audio/--/--299m5_DdE.m4a",
+          "factual": "Water flows as a child shouts in the background",
+          "counterfactual": "Wind howls as a guitar strums in the distance."
+        }
+      ]
+    },
+    {
+      "id": "clotho-dev",
+      "name": "Clotho",
+      "split_label": "development release",
+      "release_file": "clotho-development-counterfactual.json",
+      "release_url": "https://github.com/ali-vosoughi/counterfactual-audio/blob/main/clotho-development-counterfactual.json",
+      "source_url": "https://zenodo.org/records/3490684",
+      "download_url": "https://github.com/audio-captioning/clotho-dataset",
+      "path_pattern": "development/<file>.wav",
+      "notes": "Five factual captions and five aligned counterfactual captions per clip.",
+      "records": 3839,
+      "paired_caption_instances": 19195,
+      "captions_per_clip": "5",
+      "identical_pairs": 731,
+      "duration_mean": 22.494,
+      "duration_min": 15.0,
+      "duration_max": 30.0,
+      "examples": [
+        {
+          "path": "development/Distorted AM Radio noise.wav",
+          "factual": "A muddled noise of broken channel of the TV",
+          "counterfactual": "A tranquil symphony of ocean waves and seagulls at the beach."
+        },
+        {
+          "path": "development/Pipe hit.wav",
+          "factual": "A stick strikes a percussive instrument creating reverb",
+          "counterfactual": "A gentle breeze whispers through the leaves creating a soothing rustle."
+        },
+        {
+          "path": "development/outdoors2.wav",
+          "factual": "The squeaking of an old door opening, rustling ensues, the door squeaks again, and a woman speaks.",
+          "counterfactual": "The ringing of church bells, chirping of birds, rustling of leaves, and a man whistles."
+        },
+        {
+          "path": "development/loud_japanese_diner_full_of_drunk_people_120-90surround.wav",
+          "factual": "Dishes click and clack in the background as a crowd chatters indistinctly.",
+          "counterfactual": "Sirens wail and helicopters thud in the foreground as a journalist interviews a witness."
+        }
+      ]
+    },
+    {
+      "id": "clotho-val",
+      "name": "Clotho",
+      "split_label": "validation release",
+      "release_file": "clotho-validation-counterfactual.json",
+      "release_url": "https://github.com/ali-vosoughi/counterfactual-audio/blob/main/clotho-validation-counterfactual.json",
+      "source_url": "https://zenodo.org/records/3490684",
+      "download_url": "https://github.com/audio-captioning/clotho-dataset",
+      "path_pattern": "validation/<file>.wav",
+      "notes": "In the current release, captions_counterfactual matches captions for every paired entry.",
+      "records": 1045,
+      "paired_caption_instances": 5225,
+      "captions_per_clip": "5",
+      "identical_pairs": 5225,
+      "duration_mean": 22.619,
+      "duration_min": 15.05,
+      "duration_max": 29.954,
+      "examples": []
+    },
+    {
+      "id": "macs",
+      "name": "MACS",
+      "split_label": "release",
+      "release_file": "macs-counterfactual.json",
+      "release_url": "https://github.com/ali-vosoughi/counterfactual-audio/blob/main/macs-counterfactual.json",
+      "source_url": "https://zenodo.org/records/5114771",
+      "download_url": "https://zenodo.org/record/2589280",
+      "path_pattern": "development/audio/<file>.wav",
+      "notes": "Multi-annotator captions paired with aligned counterfactual rewrites.",
+      "records": 3930,
+      "paired_caption_instances": 17275,
+      "captions_per_clip": "2-5",
+      "identical_pairs": 364,
+      "duration_mean": 10.0,
+      "duration_min": 10.0,
+      "duration_max": 10.0,
+      "examples": [
+        {
+          "path": "development/audio/airport-barcelona-0-0-a.wav",
+          "factual": "a person whistling and singing",
+          "counterfactual": "A violin playing and a clock ticking."
+        },
+        {
+          "path": "development/audio/public_square-london-115-3352-a.wav",
+          "factual": "adults talking and kids screaming in the background at the beginning a rattling sound occurs",
+          "counterfactual": "musical instruments playing and people singing in the background at the beginning a phone ringing sound occurs"
+        },
+        {
+          "path": "development/audio/park-prague-1185-44120-a.wav",
+          "factual": "adults talking with cars accelerating in the background",
+          "counterfactual": "Musicians jamming with dogs barking in the background."
+        },
+        {
+          "path": "development/audio/public_square-prague-1192-45104-a.wav",
+          "factual": "adults talking and announcement jingle",
+          "counterfactual": "rain pouring and thunder rumbling"
+        }
+      ]
+    }
+  ]
+}
