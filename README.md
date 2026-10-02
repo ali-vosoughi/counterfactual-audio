@@ -81,7 +81,7 @@ factual and counterfactual text apart in embedding space.
 | --- | --- | ---: | ---: | --- | --- |
 | [`audiocaps-train-counterfactual.json`](audiocaps-train-counterfactual.json) | [AudioCaps](https://github.com/cdjkim/audiocaps) | 45,488 | 45,488 | `audio/<prefix>/<clip>.m4a` | One factual caption and one counterfactual caption per clip. |
 | [`clotho-development-counterfactual.json`](clotho-development-counterfactual.json) | [Clotho](https://zenodo.org/records/3490684) | 3,839 | 19,195 | `development/<file>.wav` | Five factual captions and five aligned counterfactual captions per clip. |
-| [`clotho-validation-counterfactual.json`](clotho-validation-counterfactual.json) | [Clotho](https://zenodo.org/records/3490684) | 1,045 | 5,225 | `validation/<file>.wav` | In the current release, `captions_counterfactual` matches `captions` entry-for-entry. |
+| [`clotho-validation-counterfactual.json`](clotho-validation-counterfactual.json) | [Clotho](https://zenodo.org/records/3490684) | 1,045 | 5,225 | `validation/<file>.wav` | In the current release, `captions_counterfactual` matches `captions` entry-for-entry, so the Clotho validation split must not be used as counterfactual negatives; use the training-split counterfactuals. |
 | [`macs-counterfactual.json`](macs-counterfactual.json) | [MACS](https://zenodo.org/records/5114771) | 3,930 | 17,275 | `development/audio/<file>.wav` | Multi-annotator captions paired with aligned counterfactual rewrites. |
 
 Across all four JSON files, the repository currently contains **54,302 audio
